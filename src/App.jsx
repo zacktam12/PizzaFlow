@@ -18,18 +18,20 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "/Order/:orderId",
-        element: <Order />,
-      },
-      {
         path: "/menu",
         element: <Menu />,
         loader: menuLoader,
         errorElement: <Error />,
       },
       {
-        path: "/Order/new",
+        path: "/order/new",
         element: <CreateOrder />,
+        loader: orderLoader,
+        errorElement: <Error />,
+      },
+      {
+        path: "/order/:orderId",
+        element: <Order />,
         loader: orderLoader,
         errorElement: <Error />,
       },
@@ -37,6 +39,6 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} />;
 }
 export default App;
