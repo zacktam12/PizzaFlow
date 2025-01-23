@@ -3,9 +3,10 @@ import SearchOrder from "../features/order/SearchOrder";
 
 function Header() {
   return (
-    <div>
+    <div className="bg-yellow-500">
       <Link to="./">Fast react pizza Co.</Link>
       <SearchOrder />
+      <p>Zack</p>
     </div>
   );
 }
