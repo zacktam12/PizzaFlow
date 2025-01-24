@@ -1,12 +1,15 @@
+import CreateUser from "../features/user/CreateUser";
+
 function Home() {
   return (
     <div>
-      <h1 className="text-center text-xl">
+      <h1 className="mb-4 text-center text-xl font-semibold">
         The best pizza.
         <br />
-        <span className="text-yellow-500">
+        <span className="py-4 font-bold text-yellow-500">
           Straight out of the oven, straight to you.
         </span>
+        <CreateUser />
       </h1>
     </div>
   );

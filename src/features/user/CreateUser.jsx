@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 function CreateUser() {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="mt-6" onSubmit={handleSubmit}>
       <p>👋 Welcome! Please start by telling us your name:</p>
 
       <input
@@ -18,7 +18,7 @@ function CreateUser() {
         onChange={(e) => setUsername(e.target.value)}
       />
 
-      {username !== '' && (
+      {username !== "" && (
         <div>
           <button>Start ordering</button>
         </div>
