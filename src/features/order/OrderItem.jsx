@@ -4,8 +4,8 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
   const { quantity, name, totalPrice } = item;
 
   return (
-    <li>
-      <div>
+    <li className="my-2">
+      <div className="mx-2 flex flex-wrap items-center justify-between gap-4 text-sm">
         <p>
           <span>{quantity}&times;</span> {name}
         </p>
