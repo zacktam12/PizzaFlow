@@ -7,8 +7,8 @@ function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
 
-  function handleAddToCart(e) {
-    e.preventDefault();
+  function handleAddToCart() {
+    console.log(id);
     const newItem = {
       pizzaId: id,
       name,
