@@ -9,6 +9,9 @@ function Button({ children, disabled, to, type, onclick }) {
       Base + " px-4 py-3 md:px-6 md:py-4 bg-yellow-400 hover:bg-yellow-300 ",
     small:
       Base +
+      " px-2.5 py-1 md:px-3.5 text-sm md:py-2 bg-yellow-400 hover:bg-yellow-300 ",
+    round:
+      Base +
       " px-4 py-2 md:px-5 text-xs md:py-2.5 bg-yellow-400 hover:bg-yellow-300 ",
     secondary:
       Base +
