@@ -29,11 +29,10 @@ function CreateOrder() {
 
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-  const formError = useActionData();
+  const formErrors = useActionData();
   const dispatch = useDispatch();
 
   const cart = useSelector(getCart);
-  console.log(cart);
 
   const totalCartPrice = useSelector(getTotalCartPrice);
   const priorityPrice = withPriority ? totalCartPrice * 0.2 : 0;
@@ -42,34 +41,34 @@ function CreateOrder() {
   if (!cart.length) return <EmptyCart />;
 
   return (
-    <div className="mx-4 mt-3">
+    <div className="px-4 py-6">
       <h2 className="font-bold uppercase italic">Ready to order? Let's go!</h2>
 
       <Form method="POST">
-        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
           <input
             className="input grow"
             type="text"
             name="customer"
             defaultValue={username}
-            plrequired
+            required
           />
         </div>
 
-        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Phone number</label>
           <div className="grow">
             <input className="input w-full" type="tel" name="phone" required />
+            {formErrors?.phone && (
+              <p className="mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700">
+                {formErrors.phone}
+              </p>
+            )}
           </div>
-          {formError?.phone && (
-            <p className="mt-2 rounded-md bg-red-100 p-2 text-xs text-red-700">
-              {formError.phone}
-            </p>
-          )}
         </div>
 
-        <div className="relative mt-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+        <div className="relative mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">Address</label>
           <div className="grow">
             <input
@@ -111,7 +110,7 @@ function CreateOrder() {
             value={withPriority}
             onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label className="px-4" htmlFor="priority">
+          <label htmlFor="priority" className="font-medium">
             Want to give your order priority?
           </label>
         </div>
@@ -122,15 +121,15 @@ function CreateOrder() {
             type="hidden"
             name="position"
             value={
-              position.longitude
+              position.longitude && position.latitude
                 ? `${position.latitude},${position.longitude}`
                 : ""
             }
           />
           <Button type="primary" disabled={isSubmitting || isLoadingAddress}>
             {isSubmitting
-              ? "Placing order..."
-              : `Order now ${formatCurrency(totalPrice)}`}
+              ? "Placing order...."
+              : `Order now from ${formatCurrency(totalPrice)}`}
           </Button>
         </div>
       </Form>
@@ -141,7 +140,6 @@ function CreateOrder() {
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
 
   const order = {
     ...data,
@@ -152,7 +150,7 @@ export async function action({ request }) {
   const errors = {};
   if (!isValidPhone(order.phone))
     errors.phone =
-      "Please give us your correct phone number we might need it to contact you";
+      "Please give us your correct phone number.We might need it to contact you.";
   if (Object.keys(errors).length > 0) return errors;
 
   // if everything is ok createNewOrder and redirect to the order page

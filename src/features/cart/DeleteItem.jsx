@@ -5,7 +5,7 @@ import { deleteItem } from "./cartSlice";
 function DeleteItem({ pizzaId }) {
   const dispatch = useDispatch();
   return (
-    <Button onclick={() => dispatch(deleteItem(pizzaId))} type="small">
+    <Button type="small" onClick={() => dispatch(deleteItem(pizzaId))}>
       Delete
     </Button>
   );

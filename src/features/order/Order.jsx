@@ -19,7 +19,6 @@ function Order() {
     },
     [fetcher],
   );
-  console.log(fetcher);
 
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
@@ -56,20 +55,20 @@ function Order() {
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
             : "Order should have arrived"}
         </p>
-        <p className="font- medium text-xs text-stone-500">
+        <p className="text-xs font-medium text-stone-500">
           (Estimated delivery: {formatDate(estimatedDelivery)})
         </p>
       </div>
-      <ul className="divide divide-y border-b border-t border-stone-200 font-medium">
+      <ul className="dive-stone-200 divide-y border-b border-t">
         {cart.map((item) => (
           <OrderItem
             item={item}
+            key={item.pizzaId}
+            isLoadingIngredients={fetcher.state === "loading"}
             ingredients={
               fetcher?.data?.find((el) => el.id === item.pizzaId)
                 ?.ingredients ?? []
             }
-            key={item.id}
-            isLoadingIngredients={fetcher.state === "isLoading"}
           />
         ))}
       </ul>
@@ -87,7 +86,7 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
-      {!priority && <UpdateOrder />}
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 }

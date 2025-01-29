@@ -8,7 +8,7 @@ function UpdateItemQuantity({ pizzaId, currentQuantity }) {
     <div className="item-center flex gap-2 md:gap-3">
       <Button
         type="round"
-        onclick={() => dispatch(decreaseItemQuantity(pizzaId))}
+        onClick={() => dispatch(decreaseItemQuantity(pizzaId))}
       >
         -
       </Button>{" "}
@@ -17,7 +17,7 @@ function UpdateItemQuantity({ pizzaId, currentQuantity }) {
       </span>
       <Button
         type="round"
-        onclick={() => dispatch(increaseItemQuantity(pizzaId))}
+        onClick={() => dispatch(increaseItemQuantity(pizzaId))}
       >
         +
       </Button>

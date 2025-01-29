@@ -6,13 +6,12 @@ import DeleteItem from "../cart/DeleteItem";
 import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
 function MenuItem({ pizza }) {
-  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
+  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const currentQuantity = useSelector(getCurrentQuantityById(id));
   const isInCart = currentQuantity > 0;
 
   function handleAddToCart() {
-    console.log(id);
     const newItem = {
       pizzaId: id,
       name,
@@ -28,16 +27,16 @@ function MenuItem({ pizza }) {
       <img
         src={imageUrl}
         alt={name}
-        className={`w-20 ${soldOut ? "opacity-70 grayscale" : ""}`}
+        className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
       />
-      <div className="flex grow flex-col justify-center">
+      <div className="flex grow flex-col">
         <p className="font-medium">{name}</p>
         <p className="text-sm capitalize italic text-stone-500">
           {ingredients.join(", ")}
         </p>
         <div className="mt-auto flex items-center justify-between text-sm">
           {!soldOut ? (
-            <p>{formatCurrency(unitPrice)}</p>
+            <p className="text-sm">{formatCurrency(unitPrice)}</p>
           ) : (
             <p className="text-sm font-medium uppercase text-stone-500">
               Sold out
@@ -46,13 +45,15 @@ function MenuItem({ pizza }) {
 
           {isInCart && (
             <div className="flex items-center gap-3 sm:gap-8">
-              {" "}
-              <UpdateItemQuantity pizzaId={id} />
+              <UpdateItemQuantity
+                pizzaId={id}
+                currentQuantity={currentQuantity}
+              />
               <DeleteItem pizzaId={id} />
             </div>
           )}
           {!soldOut && !isInCart && (
-            <Button onClick={handleAddToCart} type="small">
+            <Button type="small" onClick={handleAddToCart}>
               Add to cart
             </Button>
           )}
