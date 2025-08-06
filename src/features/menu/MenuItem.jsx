@@ -23,20 +23,20 @@ function MenuItem({ pizza }) {
   }
 
   return (
-    <li className="flex gap-4 py-2">
+    <li className="flex gap-3 py-3 sm:gap-4">
       <img
         src={imageUrl}
         alt={name}
-        className={`h-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
+        className={`h-20 w-20 flex-shrink-0 rounded-lg object-cover sm:h-24 sm:w-24 ${soldOut ? "opacity-70 grayscale" : ""}`}
       />
-      <div className="flex grow flex-col">
+      <div className="flex min-w-0 grow flex-col">
         <p className="font-medium">{name}</p>
         <p className="text-sm capitalize italic text-stone-500">
           {ingredients.join(", ")}
         </p>
-        <div className="mt-auto flex items-center justify-between text-sm">
+        <div className="mt-auto flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           {!soldOut ? (
-            <p className="text-sm">{formatCurrency(unitPrice)}</p>
+            <p className="text-sm font-medium">{formatCurrency(unitPrice)}</p>
           ) : (
             <p className="text-sm font-medium uppercase text-stone-500">
               Sold out
@@ -44,7 +44,7 @@ function MenuItem({ pizza }) {
           )}
 
           {isInCart && (
-            <div className="flex items-center gap-3 sm:gap-8">
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-8">
               <UpdateItemQuantity
                 pizzaId={id}
                 currentQuantity={currentQuantity}
