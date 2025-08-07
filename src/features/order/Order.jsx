@@ -33,24 +33,24 @@ function Order() {
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
-    <div className="space-y-8 px-4 py-4">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="text-xl font-semibold">Order #{id} Status</h2>
+    <div className="space-y-6 px-4 py-4 sm:space-y-8 sm:px-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <h2 className="text-lg font-semibold sm:text-xl">Order #{id} Status</h2>
 
-        <div className="space-x-2">
+        <div className="flex flex-wrap gap-2">
           {priority && (
-            <span className="rounded-full bg-red-500 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-red-50">
+            <span className="rounded-full bg-red-500 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-red-50 sm:px-3 sm:py-1 sm:text-sm">
               Priority
             </span>
           )}
-          <span className="rounded-full bg-green-500 px-3 py-1 text-sm font-semibold uppercase tracking-wide text-green-50">
+          <span className="rounded-full bg-green-500 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-green-50 sm:px-3 sm:py-1 sm:text-sm">
             {status} order
           </span>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 bg-stone-200 px-6 py-5">
-        <p className="font-medium">
+      <div className="flex flex-col gap-2 bg-stone-200 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-6 sm:py-5">
+        <p className="text-sm font-medium sm:text-base">
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
             : "Order should have arrived"}
@@ -59,7 +59,7 @@ function Order() {
           (Estimated delivery: {formatDate(estimatedDelivery)})
         </p>
       </div>
-      <ul className="dive-stone-200 divide-y border-b border-t">
+      <ul className="divide-y border-b border-t border-stone-200">
         {cart.map((item) => (
           <OrderItem
             item={item}
@@ -72,7 +72,7 @@ function Order() {
           />
         ))}
       </ul>
-      <div className="space-y-2 bg-stone-200 px-6 py-5">
+      <div className="space-y-2 bg-stone-200 px-4 py-4 sm:px-6 sm:py-5">
         <p className="text-sm font-medium text-stone-600">
           Price pizza: {formatCurrency(orderPrice)}
         </p>
