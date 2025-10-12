@@ -1,7 +1,7 @@
 import { formatCurrency } from "../../utils/helpers";
 import Button from "../../ui/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addItems, getCurrentQuantityById } from "../cart/cartSlice";
+import { addItem, getCurrentQuantityById } from "../cart/cartSlice";
 import DeleteItem from "../cart/DeleteItem";
 import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
@@ -19,7 +19,7 @@ function MenuItem({ pizza }) {
       unitPrice,
       totalPrice: unitPrice * 1,
     };
-    dispatch(addItems(newItem));
+    dispatch(addItem(newItem));
   }
 
   return (
