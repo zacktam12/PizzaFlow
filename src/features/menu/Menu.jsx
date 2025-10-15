@@ -23,7 +23,7 @@ function Menu() {
     
     return matchesSearch && matchesFilter;
   });
-
+// return here
   return (
     <div className="mx-2 my-4 rounded-lg bg-white/90 px-3 py-4 backdrop-blur-sm sm:px-4 sm:py-6">
       {/* Search and Filter Bar */}
