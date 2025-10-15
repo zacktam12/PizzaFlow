@@ -12,12 +12,12 @@ function SearchOrder() {
     setQuery("");
   }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex-1 max-w-xs">
       <input
         placeholder="Search order #"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-24 rounded-full bg-yellow-100 px-3 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-yellow-500 sm:w-48 sm:px-4 sm:focus:w-56 md:w-64 md:focus:w-72"
+        className="w-full rounded-full bg-white/90 px-3 py-2 text-xs transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-white/50 sm:text-sm sm:px-4 md:focus:w-full"
       />
     </form>
   );

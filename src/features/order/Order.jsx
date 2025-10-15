@@ -33,33 +33,36 @@ function Order() {
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
-    <div className="space-y-6 px-4 py-4 sm:space-y-8 sm:px-6">
+    <div className="mx-2 my-4 space-y-4 rounded-lg bg-white/90 px-3 py-4 backdrop-blur-sm sm:space-y-6 sm:px-6 sm:py-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-        <h2 className="text-lg font-semibold sm:text-xl">Order #{id} Status</h2>
+        <h2 className="text-lg font-bold text-stone-800 sm:text-xl md:text-2xl">
+          Order #{id} Status
+        </h2>
 
         <div className="flex flex-wrap gap-2">
           {priority && (
-            <span className="rounded-full bg-red-500 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-red-50 sm:px-3 sm:py-1 sm:text-sm">
+            <span className="rounded-full bg-red-500 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-red-50 shadow-sm sm:px-4 sm:py-2 sm:text-sm">
               Priority
             </span>
           )}
-          <span className="rounded-full bg-green-500 px-2 py-1 text-xs font-semibold uppercase tracking-wide text-green-50 sm:px-3 sm:py-1 sm:text-sm">
+          <span className="rounded-full bg-green-500 px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-green-50 shadow-sm sm:px-4 sm:py-2 sm:text-sm">
             {status} order
           </span>
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 bg-stone-200 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-6 sm:py-5">
-        <p className="text-sm font-medium sm:text-base">
+      <div className="flex flex-col gap-2 rounded-lg bg-primary-50 px-4 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:px-6 sm:py-5">
+        <p className="text-sm font-semibold text-primary-900 sm:text-base">
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
             : "Order should have arrived"}
         </p>
-        <p className="text-xs font-medium text-stone-500">
-          (Estimated delivery: {formatDate(estimatedDelivery)})
+        <p className="text-xs font-medium text-primary-700 sm:text-sm">
+          (Estimated: {formatDate(estimatedDelivery)})
         </p>
       </div>
-      <ul className="divide-y border-b border-t border-stone-200">
+
+      <ul className="divide-y divide-stone-200 rounded-lg border border-stone-200 bg-white">
         {cart.map((item) => (
           <OrderItem
             item={item}
@@ -72,17 +75,18 @@ function Order() {
           />
         ))}
       </ul>
-      <div className="space-y-2 bg-stone-200 px-4 py-4 sm:px-6 sm:py-5">
-        <p className="text-sm font-medium text-stone-600">
+
+      <div className="space-y-2 rounded-lg bg-stone-100 px-4 py-4 sm:px-6 sm:py-5">
+        <p className="text-sm font-medium text-stone-700 sm:text-base">
           Price pizza: {formatCurrency(orderPrice)}
         </p>
 
         {priority && (
-          <p className="text-sm font-medium text-stone-600">
+          <p className="text-sm font-medium text-stone-700 sm:text-base">
             Price priority: {formatCurrency(priorityPrice)}
           </p>
         )}
-        <p className="font-bold">
+        <p className="text-base font-bold text-stone-900 sm:text-lg">
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
