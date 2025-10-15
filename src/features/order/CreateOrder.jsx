@@ -9,7 +9,6 @@ import EmptyCart from "../cart/EmptyCart";
 import store from "../../store";
 import { formatCurrency } from "../../utils/helpers";
 import { fetchAddress } from "../user/userSlice";
-import toast from "react-hot-toast";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
