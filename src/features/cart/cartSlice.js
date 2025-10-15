@@ -1,7 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Load cart from localStorage
+const loadCartFromLocalStorage = () => {
+  try {
+    const serializedCart = localStorage.getItem("cart");
+    if (serializedCart === null) {
+      return [];
+    }
+    return JSON.parse(serializedCart);
+  } catch (err) {
+    console.error("Error loading cart from localStorage:", err);
+    return [];
+  }
+};
+
+// Save cart to localStorage
+const saveCartToLocalStorage = (cart) => {
+  try {
+    const serializedCart = JSON.stringify(cart);
+    localStorage.setItem("cart", serializedCart);
+  } catch (err) {
+    console.error("Error saving cart to localStorage:", err);
+  }
+};
+
 const initialState = {
-  cart: [],
+  cart: loadCartFromLocalStorage(),
 };
 
 const cartSlice = createSlice({
@@ -11,10 +35,12 @@ const cartSlice = createSlice({
     addItem(state, action) {
       // payload=newItem
       state.cart.push(action.payload);
+      saveCartToLocalStorage(state.cart);
     },
     deleteItem(state, action) {
       // payload=pizzaId
       state.cart = state.cart.filter((item) => item.pizzaId !== action.payload);
+      saveCartToLocalStorage(state.cart);
     },
     increaseItemQuantity(state, action) {
       // payload=pizzaId
@@ -22,6 +48,7 @@ const cartSlice = createSlice({
 
       item.quantity++;
       item.totalPrice = item.quantity * item.unitPrice;
+      saveCartToLocalStorage(state.cart);
     },
     decreaseItemQuantity(state, action) {
       // payload=pizzaId
@@ -31,9 +58,11 @@ const cartSlice = createSlice({
       item.totalPrice = item.quantity * item.unitPrice;
 
       if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
+      else saveCartToLocalStorage(state.cart);
     },
     clearCart(state) {
       state.cart = [];
+      saveCartToLocalStorage(state.cart);
     },
   },
 });
